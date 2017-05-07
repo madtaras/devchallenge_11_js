@@ -5,8 +5,6 @@ const createEmptyField = () => {
   return new Array(FIELD_SIZE).fill(false).map(elem => new Array(FIELD_SIZE).fill(false));
 };
 
-const defaultField = createEmptyField();
-
 const createRandomGeneration = () => {
   let field = createEmptyField();
   for (let i = 0; i < FIELD_SIZE; i++) {
@@ -57,7 +55,8 @@ const updateGeneration = (currentField) => {
   return newField;
 };
 
-const field = (state = defaultField, action) => {
+// field reducer
+const field = (state = createEmptyField(), action) => {
   switch (action.type) {
     case 'UPDATE_GENERATION':
       return updateGeneration(state);
