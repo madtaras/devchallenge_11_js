@@ -4,8 +4,6 @@ import { connect } from 'react-redux'
 class Field extends Component {
   render() {
     const { field } = this.props;
-    console.log('field');
-    console.dir(this.props);
     const fieldItems = field.map((col) => {
       return col.map((item) => <div style={{height: 3, width: 3, backgroundColor: item ? '#212121' : '#fff'}}> </div>)
     });
@@ -22,6 +20,4 @@ const mapStateToProps = (state) => ({
   field: state.field
 });
 
-const VisibleField = connect(mapStateToProps)(Field);
-
-export default VisibleField
+export default connect(mapStateToProps)(Field);

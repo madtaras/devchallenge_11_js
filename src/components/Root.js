@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
-import VisibleField from './VisibleField'
-import ControlPanel from './ControlPanel'
+import App from './App'
 import configureStore from '../configureStore'
 
 const store = configureStore();
@@ -21,8 +20,7 @@ export default class Root extends Component {
           alignItems: 'center',
           justifyContent: 'space-around'
         }}>
-          <VisibleField />
-          <ControlPanel />
+          <App />
         </div>
       </Provider>
     );

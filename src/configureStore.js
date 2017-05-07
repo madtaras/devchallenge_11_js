@@ -14,7 +14,7 @@ const configureStore = () => {
     }
   }
 
-  let initialState = {
+  const initialState = {
     field
   };
 
