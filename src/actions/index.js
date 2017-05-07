@@ -9,3 +9,7 @@ export const pause = () => ({
 export const stop = () => ({
   type: "STOP"
 });
+
+export const createRandomGeneration = () => ({
+  type: "CREATE_RANDOM_GENERATION"
+});

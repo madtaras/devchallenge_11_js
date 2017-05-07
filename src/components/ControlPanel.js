@@ -11,10 +11,14 @@ const commonButtonStyle = {
 class ControlPanel extends Component {
   render() {
     const { isOn, isFieldEmpty } = this.props;
-    const { start, pause, stop } = this.props.actions;
+    const {
+      start, pause, stop,
+      createRandomGeneration
+    } = this.props.actions;
     return (
       <div style={{display: 'flex', flexDirection: 'column'}}>
-        <RaisedButton label="Fill with random cells" style={commonButtonStyle} disabled={isOn} />
+        <RaisedButton label="Fill with random cells" style={commonButtonStyle} disabled={isOn}
+          onTouchTap={createRandomGeneration} />
         <RaisedButton label="Start" style={commonButtonStyle} onTouchTap={start} disabled={!isOn && isFieldEmpty} />
         <RaisedButton label="Pause" style={commonButtonStyle} onTouchTap={pause} disabled={!isOn} />
         <RaisedButton label="Stop" style={commonButtonStyle} onTouchTap={stop} disabled={!isOn} />

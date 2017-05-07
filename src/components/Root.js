@@ -18,7 +18,7 @@ store.subscribe(() => {
       store.dispatch({
         type: 'UPDATE_GENERATION'
       });
-    }, 1000);
+    }, 10);
   }
   if (!store.getState().isOn && interval !== null) {
     clearInterval(interval);
