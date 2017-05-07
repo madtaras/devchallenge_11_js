@@ -8,6 +8,7 @@ import configureStore from '../configureStore'
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
+// Set up store
 const store = configureStore();
 
 // Set up interval for generations updating
@@ -26,21 +27,23 @@ store.subscribe(() => {
   }
 });
 
+const appWrapperStyles = {
+  height: '100vh',
+  width: 1000,
+  background: '#fff',
+  borderLeft: '1px solid #d6d6d6',
+  borderRight: '1px solid #d6d6d6',
+  margin: '0 auto',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-around'
+};
+
 export default class Root extends Component {
   render() {
     return (
       <Provider store={store}>
-        <div style={{
-          height: '100vh',
-          width: 1000,
-          background: '#fff',
-          borderLeft: '1px solid #d6d6d6',
-          borderRight: '1px solid #d6d6d6',
-          margin: '0 auto',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-around'
-        }}>
+        <div style={appWrapperStyles}>
           <App />
         </div>
       </Provider>

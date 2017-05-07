@@ -4,6 +4,11 @@ import { connect } from 'react-redux'
 import * as appActions from '../actions/'
 import RaisedButton from 'material-ui/RaisedButton';
 
+const controlPanelStyles = {
+  display: 'flex',
+  flexDirection: 'column',
+};
+
 const commonButtonStyle = {
   margin: 12,
 };
@@ -15,8 +20,9 @@ class ControlPanel extends Component {
       start, pause, stop,
       createRandomGeneration
     } = this.props.actions;
+
     return (
-      <div style={{display: 'flex', flexDirection: 'column'}}>
+      <div style={controlPanelStyles}>
         <RaisedButton label="Fill with random cells" style={commonButtonStyle} disabled={isOn}
           onTouchTap={createRandomGeneration} />
         <RaisedButton label="Start" style={commonButtonStyle} onTouchTap={start} disabled={isOn || isFieldEmpty} />
