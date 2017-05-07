@@ -2,19 +2,32 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as appActions from '../actions/'
+import RaisedButton from 'material-ui/RaisedButton';
+
+const commonButtonStyle = {
+  margin: 12,
+};
 
 class ControlPanel extends Component {
   render() {
+    const { isOn, isFieldEmpty } = this.props;
+    const { start, pause, stop } = this.props.actions;
     return (
-      <div>
-        Control panel
+      <div style={{display: 'flex', flexDirection: 'column'}}>
+        <RaisedButton label="Fill with random cells" style={commonButtonStyle} disabled={isOn} />
+        <RaisedButton label="Start" style={commonButtonStyle} onTouchTap={start} disabled={!isOn && isFieldEmpty} />
+        <RaisedButton label="Pause" style={commonButtonStyle} onTouchTap={pause} disabled={!isOn} />
+        <RaisedButton label="Stop" style={commonButtonStyle} onTouchTap={stop} disabled={!isOn} />
       </div>
     )
   }
 }
 
 export default connect(
-  null,
+  (state) => ({
+    isOn: state.isOn,
+    isFieldEmpty: state.isFieldEmpty
+  }),
   (dispatch) => ({
     actions: bindActionCreators(appActions, dispatch)
   })
