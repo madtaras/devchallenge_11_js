@@ -1,9 +1,14 @@
 // Create array[200][200] and fill with false
 const FIELD_SIZE = 200;
-const defaultField = new Array(FIELD_SIZE).fill(false).map(elem => new Array(FIELD_SIZE).fill(false));
+
+const createEmptyField = () => {
+  return new Array(FIELD_SIZE).fill(false).map(elem => new Array(FIELD_SIZE).fill(false));
+};
+
+const defaultField = createEmptyField();
 
 const createRandomGeneration = () => {
-  let field = new Array(FIELD_SIZE).fill(false).map(elem => new Array(FIELD_SIZE).fill(false));
+  let field = createEmptyField();
   for (let i = 0; i < FIELD_SIZE; i++) {
     for (let j = 0; j < FIELD_SIZE; j++) {
       if (Math.random() < 0.3) {
@@ -38,23 +43,13 @@ const updateGeneration = (currentField) => {
       let neighbors = countNeighbors(currentField, i, j);
 
       if (currentField[i][j]) {
-
-        if (neighbors === 2 || neighbors === 3) {
-          // save
-          newField[i][j] = true;
-        } else {
-          // kill
-          newField[i][j] = false;
-        }
+        // Leave live cell alive if it has 2 or 3 neighbours
+        // Otherwise kill
+        newField[i][j] = neighbors === 2 || neighbors === 3;
       } else {
-        // see if this empty cell should come alive
-        if (neighbors === 3) {
-          // birth
-          newField[i][j] = true;
-        } else {
-          // staying unborn
-          newField[i][j] = false;
-        }
+        // Make dead cell alive if it has 3 neighbours
+        // Otherwise leave dead
+        newField[i][j] = neighbors === 3;
       }
     }
   }
@@ -68,6 +63,8 @@ const field = (state = defaultField, action) => {
       return updateGeneration(state);
     case "CREATE_RANDOM_GENERATION":
       return createRandomGeneration();
+    case "STOP":
+      return createEmptyField();
     default:
       return state;
   }

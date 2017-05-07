@@ -19,7 +19,7 @@ class ControlPanel extends Component {
       <div style={{display: 'flex', flexDirection: 'column'}}>
         <RaisedButton label="Fill with random cells" style={commonButtonStyle} disabled={isOn}
           onTouchTap={createRandomGeneration} />
-        <RaisedButton label="Start" style={commonButtonStyle} onTouchTap={start} disabled={!isOn && isFieldEmpty} />
+        <RaisedButton label="Start" style={commonButtonStyle} onTouchTap={start} disabled={isOn || isFieldEmpty} />
         <RaisedButton label="Pause" style={commonButtonStyle} onTouchTap={pause} disabled={!isOn} />
         <RaisedButton label="Stop" style={commonButtonStyle} onTouchTap={stop} disabled={!isOn} />
       </div>
