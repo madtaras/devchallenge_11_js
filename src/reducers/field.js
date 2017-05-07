@@ -55,6 +55,22 @@ const updateGeneration = (currentField) => {
   return newField;
 };
 
+const toggleCell = (field, i, j) => {
+  return field.map((rows, index) => {
+    if (i === index) {
+      return rows.map((item, j1) => {
+        if (j === j1) {
+          return !item;
+        } else {
+          return item;
+        }
+      })
+    } else {
+      return rows;
+    }
+  })
+};
+
 // field reducer
 const field = (state = createEmptyField(), action) => {
   switch (action.type) {
@@ -64,6 +80,8 @@ const field = (state = createEmptyField(), action) => {
       return createRandomGeneration();
     case "STOP":
       return createEmptyField();
+    case "TOGGLE_CELL":
+      return toggleCell(state, action.i, action.j);
     default:
       return state;
   }
