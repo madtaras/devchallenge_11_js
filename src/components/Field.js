@@ -9,7 +9,7 @@ class Field extends Component {
     });
 
     return (
-      <div style={{height: 600, width: 600}}>
+      <div style={{height: 600, width: 600, border: '1px solid #212121'}}>
         {fieldItems}
       </div>
     )
