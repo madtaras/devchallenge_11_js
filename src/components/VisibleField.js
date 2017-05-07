@@ -6,12 +6,12 @@ class Field extends Component {
     const { field } = this.props;
     console.log('field');
     console.dir(this.props);
-    const fieldItems = field.map((row) => (col) =>
-      <div style={{height: 5, width: 5, backgroundColor: 'red'}}> </div>
-    );
+    const fieldItems = field.map((col) => {
+      return col.map((item) => <div style={{height: 3, width: 3, backgroundColor: item ? '#212121' : '#fff'}}> </div>)
+    });
 
     return (
-      <div>
+      <div style={{height: 600, width: 600, display: 'flex', flexWrap: 'wrap'}}>
         {fieldItems}
       </div>
     )
