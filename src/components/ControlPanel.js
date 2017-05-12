@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as appActions from '../actions/'
+import {
+  start,
+  pause,
+  stop,
+  createRandomGeneration
+} from '../actions/'
 import RaisedButton from 'material-ui/RaisedButton';
 
 const controlPanelStyles = {
@@ -19,7 +23,7 @@ class ControlPanel extends Component {
     const {
       start, pause, stop,
       createRandomGeneration
-    } = this.props.actions;
+    } = this.props;
 
     return (
       <div style={controlPanelStyles}>
@@ -38,7 +42,10 @@ export default connect(
     isOn: state.isOn,
     isFieldEmpty: state.isFieldEmpty
   }),
-  (dispatch) => ({
-    actions: bindActionCreators(appActions, dispatch)
-  })
+  {
+      start,
+      pause,
+      stop,
+      createRandomGeneration
+  }
 )(ControlPanel);

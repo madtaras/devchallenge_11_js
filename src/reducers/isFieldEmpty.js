@@ -1,12 +1,12 @@
-const isFieldEmpty = (state = true, action) => {
-  switch (action.type) {
-    case "STOP":
-      return true;
-    case "CREATE_RANDOM_GENERATION":
-      return false;
-    default:
-      return state;
-  }
-};
+import { createReducer } from 'redux-act';
+import {
+  stop,
+  createRandomGeneration
+} from '../actions';
+
+const isFieldEmpty = createReducer({
+  [stop]: (state) => true,
+  [createRandomGeneration]: (state) => false
+}, true);
 
 export default isFieldEmpty

@@ -1,21 +1,9 @@
-export const start = () => ({
-  type: "START"
-});
+import { createAction } from 'redux-act';
 
-export const pause = () => ({
-  type: "PAUSE"
-});
+export const start = createAction('Start playing');
+export const pause = createAction('Pause playing');
+export const stop = createAction('Stop playing');
 
-export const stop = () => ({
-  type: "STOP"
-});
-
-export const createRandomGeneration = () => ({
-  type: "CREATE_RANDOM_GENERATION"
-});
-
-export const toggleCell = (i, j) => ({
-  type: "TOGGLE_CELL",
-  i,
-  j
-});
+export const createRandomGeneration = createAction('Create random generation');
+export const updateGeneration = createAction('Update generation');
+export const toggleCell = createAction('Toggle cell');

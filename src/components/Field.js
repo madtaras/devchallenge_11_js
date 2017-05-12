@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { toggleCell } from '../actions'
-import { bindActionCreators } from 'redux'
 
 const fieldStyles = {
   height: 600,
@@ -13,11 +12,12 @@ class Field extends Component {
   render() {
     const { field } = this.props;
     const { toggleCell } = this.props;
-    const fieldItems = field.map((col, i) => {
-      return col.map((item, j) => {
+    const fieldItems = field.map((col, x) => {
+      return col.map((item, y) => {
+        // Keep Cell jsx here for better performance
         return <div style={{height: 3, width: 3, float: 'left',
           backgroundColor: item ? '#212121' : '#fff',}}
-          onClick={() => toggleCell(i, j)}> </div>
+                    onClick={() => toggleCell({x: x, y: y})}> </div>
       })
     });
 
@@ -33,5 +33,5 @@ export default connect(
   (state) => ({
     field: state.field
   }),
-  (dispatch) => bindActionCreators({ toggleCell }, dispatch)
+  { toggleCell }
 )(Field);

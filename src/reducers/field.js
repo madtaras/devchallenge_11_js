@@ -1,3 +1,11 @@
+import { createReducer } from 'redux-act'
+import {
+  updateGeneration,
+  createRandomGeneration,
+  toggleCell,
+  stop
+} from '../actions'
+
 // Create array[200][200] and fill with false
 const FIELD_SIZE = 200;
 
@@ -5,16 +13,12 @@ const createEmptyField = () => {
   return new Array(FIELD_SIZE).fill(false).map(elem => new Array(FIELD_SIZE).fill(false));
 };
 
-const createRandomGeneration = () => {
-  let field = createEmptyField();
-  for (let i = 0; i < FIELD_SIZE; i++) {
-    for (let j = 0; j < FIELD_SIZE; j++) {
-      if (Math.random() < 0.3) {
-        field[i][j] = true;
-      }
-    }
-  }
-  return field;
+const createRandomGenerationHelper = () => {
+  return createEmptyField().map((rows) => {
+    return rows.map(() => {
+      return Math.random() < 0.3
+    })
+  })
 };
 
 const countNeighbors = (field, i, j) => {
@@ -32,7 +36,7 @@ const countNeighbors = (field, i, j) => {
   return total;
 };
 
-const updateGeneration = (currentField) => {
+const updateGenerationHelper = (currentField) => {
   const newField = [];
 
   for (let i = 0; i < FIELD_SIZE; i++) {
@@ -55,11 +59,11 @@ const updateGeneration = (currentField) => {
   return newField;
 };
 
-const toggleCell = (field, i, j) => {
-  return field.map((rows, index) => {
-    if (i === index) {
-      return rows.map((item, j1) => {
-        if (j === j1) {
+const toggleCellHelper = (field, payload) => {
+  return field.map((rows, i) => {
+    if (payload.x === i) {
+      return rows.map((item, j) => {
+        if (payload.y === j) {
           return !item;
         } else {
           return item;
@@ -71,20 +75,11 @@ const toggleCell = (field, i, j) => {
   })
 };
 
-// field reducer
-const field = (state = createEmptyField(), action) => {
-  switch (action.type) {
-    case 'UPDATE_GENERATION':
-      return updateGeneration(state);
-    case "CREATE_RANDOM_GENERATION":
-      return createRandomGeneration();
-    case "STOP":
-      return createEmptyField();
-    case "TOGGLE_CELL":
-      return toggleCell(state, action.i, action.j);
-    default:
-      return state;
-  }
-};
+const field = createReducer({
+  [updateGeneration]: updateGenerationHelper,
+  [createRandomGeneration]: createRandomGenerationHelper,
+  [stop]: (state) => createEmptyField(),
+  [toggleCell]: toggleCellHelper
+}, createEmptyField());
 
 export default field

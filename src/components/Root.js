@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import App from './App'
+
+import { updateGeneration } from '../actions'
 import configureStore from '../configureStore'
 
 // Needed for onTouchTap
@@ -16,9 +18,7 @@ let interval = null;
 store.subscribe(() => {
   if (store.getState().isOn && interval === null) {
     interval = setInterval(() => {
-      store.dispatch({
-        type: 'UPDATE_GENERATION'
-      });
+      store.dispatch(updateGeneration());
     }, 500);
   }
   if (!store.getState().isOn && interval !== null) {
