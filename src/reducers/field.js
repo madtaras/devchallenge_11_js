@@ -7,7 +7,7 @@ import {
 } from '../actions'
 
 // Create array[200][200] and fill with false
-const FIELD_SIZE = 200;
+const FIELD_SIZE = 100;
 
 const createEmptyField = () => {
   return new Array(FIELD_SIZE).fill(false).map(elem => new Array(FIELD_SIZE).fill(false));
